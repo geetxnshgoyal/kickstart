@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kickstart Internal Hackathon</title>
+  <title>Kickstart Hackathon</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -14,179 +14,78 @@
     <div class="background__orb background__orb--two"></div>
   </div>
   <header class="hero">
-    <div class="hero__content">
-      <p class="badge">Kickstart Labs presents</p>
-      <h1>Kickstart Internal Hackathon 2025</h1>
-      <p class="subtitle">Co-create the future of smart campuses, from seamless mobility to connected classrooms, in a single-day onsite sprint. The brief drops live at kickoff—arrive ready to ideate, prototype, and present.</p>
-      <div class="hero__cta">
-        <a class="button" href="#register">Register Now</a>
-        <a class="button button--ghost" href="#timeline">See the Schedule</a>
+    <div class="hero__inner">
+      <div class="hero__copy">
+        <p class="badge">Kickstart presents</p>
+        <h1>Kickstart Hackathon 2025</h1>
+        <p class="subtitle">Co-create the future of smart campuses, from seamless mobility to connected classrooms, in a single-day onsite sprint. The brief drops live at kickoff&mdash;arrive ready to ideate, prototype, and present.</p>
+        <div class="hero__cta">
+          <a class="button" href="#register">Register Now</a>
+          <a class="button button--ghost" href="#timeline">See the Schedule</a>
+        </div>
+        <ul class="hero__stats">
+          <li><span class="stat__value">14</span><span class="stat__label">Hours Onsite</span></li>
+          <li><span class="stat__value">15</span><span class="stat__label">Demo Slots</span></li>
+          <li><span class="stat__value">60</span><span class="stat__label">Participants</span></li>
+        </ul>
       </div>
-      <ul class="hero__stats">
-        <li><span class="stat__value">14</span><span class="stat__label">Hours Onsite</span></li>
-        <li><span class="stat__value">15</span><span class="stat__label">Demo Slots</span></li>
-        <li><span class="stat__value">60</span><span class="stat__label">Participants</span></li>
-      </ul>
-    </div>
-    <div class="hero__illustration" aria-hidden="true">
-      <div class="blob"></div>
-      <div class="orbit orbit--one"></div>
-      <div class="orbit orbit--two"></div>
-      <div class="spark spark--one"></div>
-      <div class="spark spark--two"></div>
+      <div class="hero__visual" aria-hidden="true">
+        <div class="hero__grid"></div>
+        <div class="hero__blob"></div>
+        <div class="hero__orbit hero__orbit--outer"></div>
+        <div class="hero__orbit hero__orbit--inner"></div>
+        <span class="hero__particle hero__particle--one"></span>
+        <span class="hero__particle hero__particle--two"></span>
+        <span class="hero__particle hero__particle--three"></span>
+        <div class="hero__logo">
+          <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="presentation">
+            <defs>
+              <linearGradient id="kickstart-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#38bdf8" />
+                <stop offset="50%" stop-color="#8b5cf6" />
+                <stop offset="100%" stop-color="#f472b6" />
+              </linearGradient>
+              <radialGradient id="kickstart-glow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="rgba(56, 189, 248, 0.6)" />
+                <stop offset="60%" stop-color="rgba(14, 165, 233, 0.15)" />
+                <stop offset="100%" stop-color="rgba(2, 6, 23, 0)" />
+              </radialGradient>
+            </defs>
+            <circle class="logo-glow" cx="60" cy="60" r="52" fill="url(#kickstart-glow)" />
+            <circle class="logo-ring" cx="60" cy="60" r="48" fill="none" stroke="url(#kickstart-gradient)" stroke-width="4" stroke-linecap="round" />
+            <path class="logo-k" d="M40 30 V90 M40 60 L78 28 M40 60 L85 102" fill="none" stroke="url(#kickstart-gradient)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+            <circle class="logo-node" cx="88" cy="34" r="6" />
+            <path class="logo-spark" d="M58 18 Q88 30 86 54" fill="none" stroke="rgba(148, 163, 184, 0.35)" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </div>
+      </div>
     </div>
   </header>
 
   <main>
-    <section id="structure" class="section">
+    <section id="theme" class="section section--alt">
       <div class="section__content">
-        <h2>Format &amp; Structure</h2>
-        <p>Follow the organising committee's playbook for the day&mdash;from the moment you check in until the final award is handed out.</p>
-        <ul class="structure-list">
-          <li><span class="structure-time">07:00 &ndash; 08:30</span> Check-in, registration desk, and pre-hack Utsav welcome.</li>
-          <li><span class="structure-time">08:30 &ndash; 09:15</span> Opening ceremony, guidelines, evaluation criteria, and theme reveal.</li>
-          <li><span class="structure-time">09:00 &ndash; 10:00</span> Optional workshop for beginners covering tools, data sets, and rapid prototyping.</li>
-          <li><span class="structure-time">10:00 &ndash; 12:30</span> Hackathon Sprint I: lock your scope, submit problem statements, start building.</li>
-          <li><span class="structure-time">12:30 &ndash; 14:30</span> Lunch break and mentor check-ins to recalibrate plans.</li>
-          <li><span class="structure-time">14:30 &ndash; 17:30</span> Hackathon Sprint II with mentors on call for unblockers.</li>
-          <li><span class="structure-time">17:30 &ndash; 18:00</span> Snack break and transition to polish mode.</li>
-          <li><span class="structure-time">17:30 &ndash; 18:30</span> Submission window: upload repo, demo links, and complete the Google Form.</li>
-          <li><span class="structure-time">18:00 &ndash; 19:00</span> Final coding session to refine demos and storytelling.</li>
-          <li><span class="structure-time">19:30 &ndash; 20:00</span> Closing ceremony, awards, judge messages, and feedback QR.</li>
-          <li><span class="structure-time">20:00 &ndash; 21:00</span> Post-hack wrap-up, networking, and website recap.</li>
-        </ul>
-        <div class="cards">
-          <article class="card">
-            <h3>Pre-Hackathon Utsav</h3>
-            <p>Update the Google Form with GitHub links, finalise seat allocations, and prep comms before directing teams to the seminar hall.</p>
-          </article>
-          <article class="card">
-            <h3>Build Marathon</h3>
-            <p>Two focused build sprints with mentors, report-ins, and checkpoints to keep progress visible across classrooms and labs.</p>
-          </article>
-          <article class="card">
-            <h3>Showcase &amp; Celebration</h3>
-            <p>Fifteen demo slots, live judging with Q&amp;A, snacks on the 6th floor, and a closing ceremony to recognise every win.</p>
-          </article>
+        <h2>Theme Reveal</h2>
+        <p>The Smart Campus problem statement will be unveiled live during the 09:00 AM opening ceremony. Use the countdown below to prep your team and gather any data or hardware you'll want the moment it drops.</p>
+        <div class="countdown" role="timer" aria-live="polite">
+          <div class="countdown__unit">
+            <span class="countdown__value" id="countdown-days">00</span>
+            <span class="countdown__label">Days</span>
+          </div>
+          <div class="countdown__unit">
+            <span class="countdown__value" id="countdown-hours">00</span>
+            <span class="countdown__label">Hours</span>
+          </div>
+          <div class="countdown__unit">
+            <span class="countdown__value" id="countdown-minutes">00</span>
+            <span class="countdown__label">Minutes</span>
+          </div>
+          <div class="countdown__unit">
+            <span class="countdown__value" id="countdown-seconds">00</span>
+            <span class="countdown__label">Seconds</span>
+          </div>
         </div>
-      </div>
-    </section>
-
-    <section id="flow" class="section section--alt">
-      <div class="section__content">
-        <h2>Flow &amp; Logistics</h2>
-        <div class="flow-grid">
-          <article class="flow-card">
-            <h3>Pre-Hackathon Utsav</h3>
-            <p>Set the stage with comms, tooling, and seat allocation before the first teams arrive.</p>
-            <ul class="flow-meta">
-              <li><span class="flow-label">Flow</span><span>Google Form (capture GitHub links), seat allocation setup, registration message with deadline.</span></li>
-              <li><span class="flow-label">Logistics</span><span>Google Form response sheet, participant tracker.</span></li>
-              <li><span class="flow-label">Venue</span><span>1st Floor lobby tables.</span></li>
-              <li><span class="flow-label">Timing</span><span>07:00 &ndash; 08:30.</span></li>
-            </ul>
-          </article>
-          <article class="flow-card">
-            <h3>Team Allocation &amp; ID Check</h3>
-            <p>Confirm team details and route everyone to the seminar hall without bottlenecks.</p>
-            <ul class="flow-meta">
-              <li><span class="flow-label">Flow</span><span>Random team allocation, cross-check team names, ID verification, assign classroom or lab seats.</span></li>
-              <li><span class="flow-label">Logistics</span><span>Use the response sheet and participant tracker to mark attendance.</span></li>
-              <li><span class="flow-label">Venue</span><span>1st Floor lobby (registration desk).</span></li>
-              <li><span class="flow-label">Timing</span><span>07:30 &ndash; 08:30.</span></li>
-            </ul>
-          </article>
-          <article class="flow-card">
-            <h3>Opening Ceremony</h3>
-            <p>Welcome remarks, theme reveal, rules, and prize overview hosted by Sadiqua and the organising crew.</p>
-            <ul class="flow-meta">
-              <li><span class="flow-label">Flow</span><span>Guidelines, evaluation criteria, prize announcement, POC reporting times, icebreakers, submit problem statements.</span></li>
-              <li><span class="flow-label">Logistics</span><span>Allocate two hosts, ready AV, collect questions (15 mins).</span></li>
-              <li><span class="flow-label">Venue</span><span>Seminar Hall.</span></li>
-              <li><span class="flow-label">Timing</span><span>08:30 &ndash; 09:30.</span></li>
-            </ul>
-          </article>
-          <article class="flow-card">
-            <h3>Optional Workshop</h3>
-            <p>A beginner-friendly primer on tools, idea framing, and smart campus datasets.</p>
-            <ul class="flow-meta">
-              <li><span class="flow-label">Flow</span><span>Introduce tooling stack, Git best practices, sample problem breakdown.</span></li>
-              <li><span class="flow-label">Logistics</span><span>Facilitator + demo repo, projector-ready slides.</span></li>
-              <li><span class="flow-label">Venue</span><span>Seminar Hall.</span></li>
-              <li><span class="flow-label">Timing</span><span>09:00 &ndash; 10:00.</span></li>
-            </ul>
-          </article>
-          <article class="flow-card">
-            <h3>Hackathon Sprint I</h3>
-            <p>Teams move to labs/classrooms, lock their scope, and start prototyping.</p>
-            <ul class="flow-meta">
-              <li><span class="flow-label">Flow</span><span>Submit problem statements, align on deliverables, log first mentor checkpoints.</span></li>
-              <li><span class="flow-label">Logistics</span><span>Ensure power strips, Wi-Fi, and whiteboards are available.</span></li>
-              <li><span class="flow-label">Venue</span><span>Assigned labs &amp; classrooms.</span></li>
-              <li><span class="flow-label">Timing</span><span>10:00 &ndash; 12:30.</span></li>
-            </ul>
-          </article>
-          <article class="flow-card">
-            <h3>Lunch Reset</h3>
-            <p>Refuel, gather status updates, and plan the afternoon sprint with mentors.</p>
-            <ul class="flow-meta">
-              <li><span class="flow-label">Flow</span><span>Team syncs, mentor office hours sign-ups, adjust build plan.</span></li>
-              <li><span class="flow-label">Logistics</span><span>Coordinate catering, capture dietary needs, share next reporting time.</span></li>
-              <li><span class="flow-label">Venue</span><span>Cafeteria / dining area.</span></li>
-              <li><span class="flow-label">Timing</span><span>12:30 &ndash; 14:00.</span></li>
-            </ul>
-          </article>
-          <article class="flow-card">
-            <h3>Mentor Availability</h3>
-            <p>Subject-matter experts rotate across rooms to unblock teams through the afternoon.</p>
-            <ul class="flow-meta">
-              <li><span class="flow-label">Flow</span><span>Office-hour slots, progress check-ins, escalation path to OC.</span></li>
-              <li><span class="flow-label">Logistics</span><span>Mentor roster, contact sheet, escalation Slack channel.</span></li>
-              <li><span class="flow-label">Venue</span><span>Labs &amp; classrooms.</span></li>
-              <li><span class="flow-label">Timing</span><span>14:00 &ndash; 17:00.</span></li>
-            </ul>
-          </article>
-          <article class="flow-card">
-            <h3>Presentations &amp; Judging</h3>
-            <p>Fifteen demo slots with seven-minute sessions including Q&amp;A and buffer.</p>
-            <ul class="flow-meta">
-              <li><span class="flow-label">Flow</span><span>3-minute demo, 2 judges, 1 Q&amp;A, 1-minute buffer per team.</span></li>
-              <li><span class="flow-label">Logistics</span><span>OC moderator, timer, judging sheets, clicker checks.</span></li>
-              <li><span class="flow-label">Venue</span><span>Seminar Hall.</span></li>
-              <li><span class="flow-label">Timing</span><span>17:15 &ndash; 19:00.</span></li>
-            </ul>
-          </article>
-          <article class="flow-card">
-            <h3>Snacks &amp; Judges Huddle</h3>
-            <p>Light bites while judges consolidate scores and select category winners.</p>
-            <ul class="flow-meta">
-              <li><span class="flow-label">Flow</span><span>Buffer for scoring alignment and AV resets.</span></li>
-              <li><span class="flow-label">Logistics</span><span>Snacks on standby, quiet room for deliberation.</span></li>
-              <li><span class="flow-label">Venue</span><span>6th Floor lounge.</span></li>
-              <li><span class="flow-label">Timing</span><span>19:00 &ndash; 19:30.</span></li>
-            </ul>
-          </article>
-          <article class="flow-card">
-            <h3>Closing &amp; Feedback</h3>
-            <p>Announce results, share judge reflections, and capture feedback for the recap site.</p>
-            <ul class="flow-meta">
-              <li><span class="flow-label">Flow</span><span>Results announcements, messages from judges, prize distribution, feedback form QR.</span></li>
-              <li><span class="flow-label">Logistics</span><span>Stage crew, photography, QR signage, take-home certificates.</span></li>
-              <li><span class="flow-label">Venue</span><span>Seminar Hall.</span></li>
-              <li><span class="flow-label">Timing</span><span>19:30 &ndash; 20:00.</span></li>
-            </ul>
-          </article>
-          <article class="flow-card">
-            <h3>Post-Hack Wrap</h3>
-            <p>Ship the recap website, push recordings, and circulate thank-you notes.</p>
-            <ul class="flow-meta">
-              <li><span class="flow-label">Flow</span><span>Compile demos, publish highlights, share next steps with stakeholders.</span></li>
-              <li><span class="flow-label">Logistics</span><span>Assign content owners, gather media, update Confluence.</span></li>
-              <li><span class="flow-label">Venue</span><span>Remote follow-up.</span></li>
-              <li><span class="flow-label">Timing</span><span>20:00 &ndash; onwards.</span></li>
-            </ul>
-          </article>
-        </div>
+        <p class="note countdown__note">Countdown targets 9:00 AM IST on October 11, 2025. It will hold at 00:00 once the theme is revealed live.</p>
       </div>
     </section>
 
@@ -195,54 +94,59 @@
         <h2>Event Timeline</h2>
         <div class="timeline">
           <div class="timeline__item">
-            <p class="timeline__time">October 11 · 07:00</p>
-            <h3>Check-In &amp; Team Setup</h3>
-            <p>Arrive early for registration, grab breakfast, and sync with your crew before the rush.</p>
+            <p class="timeline__time">October 11 · 07:00 &ndash; 08:30 · 1st Floor Lobby</p>
+            <h3>Check-In &amp; Breakfast</h3>
+            <p>Arrive early to register, collect your badge, and grab breakfast before the action kicks off.</p>
           </div>
           <div class="timeline__item">
-            <p class="timeline__time">October 11 · 08:30</p>
+            <p class="timeline__time">October 11 · 08:30 &ndash; 09:30 · Seminar Hall</p>
             <h3>Opening Ceremony &amp; Theme Reveal</h3>
-            <p>Welcome remarks, guidelines, and the big unveil: Smart Campuses. Teams submit their problem statements on the spot.</p>
+            <p>Kickoff with welcome notes, Smart Campus brief, judging criteria, and prize overview.</p>
           </div>
           <div class="timeline__item">
-            <p class="timeline__time">October 11 · 09:00</p>
+            <p class="timeline__time">October 11 · 09:00 &ndash; 10:00 · Seminar Hall</p>
             <h3>Optional Workshop</h3>
-            <p>New to hackathons? Join our beginner-friendly primer on campus data sets and rapid prototyping techniques.</p>
+            <p>New to hackathons? Drop in for a quick primer on tools, sample datasets, and rapid prototyping tips.</p>
           </div>
           <div class="timeline__item">
-            <p class="timeline__time">October 11 · 10:00</p>
+            <p class="timeline__time">October 11 · 10:00 &ndash; 12:30 · Labs &amp; Classrooms</p>
             <h3>Hacking Sprint I</h3>
-            <p>Claim a lab desk, lock your scope, and start building your Smart Campus MVP.</p>
+            <p>Claim your workspace, lock the idea, and start shipping features for your Smart Campus solution.</p>
           </div>
           <div class="timeline__item">
-            <p class="timeline__time">October 11 · 12:30</p>
+            <p class="timeline__time">October 11 · 12:30 &ndash; 14:00 · Dining Area</p>
             <h3>Lunch &amp; Mentor Meetups</h3>
-            <p>Recharge over lunch, check in with mentors, and adjust your build plan before the afternoon push.</p>
+            <p>Refuel, share progress, and get feedback before diving back in.</p>
           </div>
           <div class="timeline__item">
-            <p class="timeline__time">October 11 · 14:30</p>
-            <h3>Hacking Sprint II</h3>
-            <p>Dive back in for focused development time with mentors on standby for unblockers.</p>
+            <p class="timeline__time">October 11 · 14:00 &ndash; 17:00 · Labs &amp; Classrooms</p>
+            <h3>Hacking Sprint II &amp; Mentor Hours</h3>
+            <p>Build, test, and iterate with mentors on call for unblockers and polish suggestions.</p>
           </div>
           <div class="timeline__item">
-            <p class="timeline__time">October 11 · 17:30</p>
-            <h3>Snack Break</h3>
-            <p>Step away for a breather, refuel, and prep your final polish checklist.</p>
+            <p class="timeline__time">October 11 · 17:00 &ndash; 18:30 · Labs &amp; Classrooms</p>
+            <h3>Submission &amp; Polish Window</h3>
+            <p>Finish last-mile fixes, record your links, and submit everything through the Google Form by 18:30.</p>
           </div>
           <div class="timeline__item">
-            <p class="timeline__time">October 11 · 18:00</p>
-            <h3>Polish &amp; Submission Window</h3>
-            <p>Finalize demos, tighten storytelling, and submit assets before the 18:30 deadline.</p>
+            <p class="timeline__time">October 11 · 17:15 &ndash; 19:00 · Seminar Hall</p>
+            <h3>Presentations &amp; Judging</h3>
+            <p>Each team gets seven minutes: three for demos, two judges, one Q&amp;A, and a buffer.</p>
           </div>
           <div class="timeline__item">
-            <p class="timeline__time">October 11 · 19:30</p>
-            <h3>Demos &amp; Judging</h3>
-            <p>Pitch your prototype, tackle Q&amp;A with the judging panel, and cheer on fellow teams.</p>
+            <p class="timeline__time">October 11 · 19:00 &ndash; 19:30 · 6th Floor Lounge</p>
+            <h3>Snacks &amp; Judges Huddle</h3>
+            <p>Grab light bites while the judging panel finalises scores and prepares announcements.</p>
           </div>
           <div class="timeline__item">
-            <p class="timeline__time">October 11 · 20:30</p>
-            <h3>Closing Ceremony &amp; Awards</h3>
-            <p>Celebrate the winners, collect feedback, and capture the moment before doors close at 21:00.</p>
+            <p class="timeline__time">October 11 · 19:30 &ndash; 20:00 · Seminar Hall</p>
+            <h3>Closing Ceremony</h3>
+            <p>Results announcements, feedback QR code, prizes, and a final message from the judges.</p>
+          </div>
+          <div class="timeline__item">
+            <p class="timeline__time">October 11 · 20:00 &ndash; 21:00 · Common Areas</p>
+            <h3>Post-Hack Wrap</h3>
+            <p>Networking, photo ops, and content collection for the recap website.</p>
           </div>
         </div>
       </div>
@@ -263,7 +167,7 @@
           </article>
           <article class="card">
             <h3>Technical Execution · 25%</h3>
-            <p>Working prototype depth, architecture decisions, and code quality—including readiness to ship.</p>
+            <p>Working prototype depth, architecture decisions, and code quality including readiness to ship.</p>
           </article>
           <article class="card">
             <h3>Storytelling &amp; UX · 15%</h3>
@@ -278,10 +182,10 @@
       <div class="section__content">
         <h2>Submission Guidelines</h2>
         <ol class="guidelines">
-          <li>Open source your project and share the repository link (GitHub preferred for review).</li>
-          <li>Provide deployment or demo access. Hosted versions earn bonus points for reliability.</li>
-          <li>Upload a 2-minute demo video plus your slide deck before the submission window closes at 18:30.</li>
-          <li>Be ready for a 7-minute live pitch: 3-minute walkthrough, 2-minute demo, 2-minute Q&amp;A.</li>
+          <li>Make your code open source and add a clear licence in the repository.</li>
+          <li>Share the project URL (GitHub preferred) with a README explaining setup, datasets, and key features.</li>
+          <li>Host your build if possible&mdash;extra credit for live demos or deployed links included in the submission.</li>
+          <li>Upload your deck, demo assets, and repository link through the Google Form before 18:30.</li>
         </ol>
       </div>
     </section>
@@ -314,12 +218,11 @@
       <div class="section__content">
         <h2>Awards &amp; Prizes</h2>
         <ul class="prizes">
-          <li><span class="prize__title">Judges' Evaluation Winner</span> Hosting &amp; cloud credits, hardware dev kit, and project spotlight with leadership.</li>
-          <li><span class="prize__title">Crowd Choice</span> Live-voted favorite earns premium swag bundles and experience vouchers.</li>
-          <li><span class="prize__title">Most Innovative Hack</span> API credits plus mentorship to explore incubation pathways.</li>
-          <li><span class="prize__title">Best Smart Campus Impact</span> Subscription to industry tools and co-creation session with Campus Ops.</li>
-          <li><span class="prize__title">Best Design &amp; UX</span> Design mentorship series and prototyping gear.</li>
+          <li><span class="prize__title">Judges' Evaluation Winner</span> Hosting/cloud credits, hardware dev kit (RPis, Arduinos), and API credits.</li>
+          <li><span class="prize__title">Crowd Voted Favourite</span> Audience-selected standout receives vouchers, swag, and spotlight coverage.</li>
+          <li><span class="prize__title">Most Innovative Hack</span> Hardware gear plus API credits to keep exploring the concept.</li>
         </ul>
+        <p class="note">Prize pool includes hosting/cloud credits, hardware (RPis, Arduinos), vouchers, subscriptions.</p>
       </div>
     </section>
 
@@ -329,7 +232,7 @@
         <div class="faq">
           <details>
             <summary>Who can participate?</summary>
-            <p>The hackathon is open to all Kickstart employees — engineers, designers, PMs, operations, and anyone excited to build.</p>
+            <p>The hackathon is open to all.</p>
           </details>
           <details>
             <summary>Do I need a team ready?</summary>
@@ -341,7 +244,7 @@
           </details>
           <details>
             <summary>Will meals be provided?</summary>
-            <p>Yes! We'll have meals, snacks, and caffeine throughout the hackathon so you can stay focused.</p>
+            <p>Yes! We'll have snacks, and caffeine throughout the hackathon so you can stay focused.</p>
           </details>
         </div>
       </div>
@@ -361,9 +264,61 @@
 
   <footer class="footer">
     <div class="footer__content">
-      <p>&copy; 2025 Kickstart Labs. All rights reserved.</p>
-      <p>Need help? Email <a href="mailto:hackathon@kickstartlabs.com">hackathon@kickstartlabs.com</a>.</p>
+      <p>&copy; 2025 Kickstart. All rights reserved.</p>
+      <p>Need help? Email <a href="mailto:hackathon@justkickstart.me">hackathon@justkickstart.me</a>.</p>
     </div>
   </footer>
+  <script>
+    (function () {
+      var target = new Date('2025-10-11T09:00:00+05:30');
+      var daysEl = document.getElementById('countdown-days');
+      var hoursEl = document.getElementById('countdown-hours');
+      var minutesEl = document.getElementById('countdown-minutes');
+      var secondsEl = document.getElementById('countdown-seconds');
+
+      if (!daysEl || !hoursEl || !minutesEl || !secondsEl) {
+        return;
+      }
+
+      if (isNaN(target.getTime())) {
+        target = new Date(Date.UTC(2025, 9, 11, 3, 30, 0));
+        if (isNaN(target.getTime())) {
+          return;
+        }
+      }
+
+      function pad(value) {
+        return String(value).padStart(2, '0');
+      }
+
+      function updateCountdown() {
+        var now = new Date();
+        var diff = target.getTime() - now.getTime();
+
+        if (diff <= 0) {
+          daysEl.textContent = '00';
+          hoursEl.textContent = '00';
+          minutesEl.textContent = '00';
+          secondsEl.textContent = '00';
+          clearInterval(timerId);
+          return;
+        }
+
+        var totalSeconds = Math.floor(diff / 1000);
+        var days = Math.floor(totalSeconds / 86400);
+        var hours = Math.floor((totalSeconds % 86400) / 3600);
+        var minutes = Math.floor((totalSeconds % 3600) / 60);
+        var seconds = totalSeconds % 60;
+
+        daysEl.textContent = pad(days);
+        hoursEl.textContent = pad(hours);
+        minutesEl.textContent = pad(minutes);
+        secondsEl.textContent = pad(seconds);
+      }
+
+      var timerId = setInterval(updateCountdown, 1000);
+      updateCountdown();
+    })();
+  </script>
 </body>
 </html>
