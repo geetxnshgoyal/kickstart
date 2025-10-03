@@ -47,10 +47,10 @@ a:hover,
   margin: 0 auto;
   border-radius: var(--border-radius);
   overflow: hidden;
-  background: rgba(10, 25, 47, 0.82);
-  border: 1px solid rgba(59, 130, 246, 0.18);
-  box-shadow: 0 30px 80px rgba(8, 47, 73, 0.4);
-  backdrop-filter: blur(18px);
+  background: rgba(5, 16, 32, 0.18);
+  border: 1px solid rgba(56, 130, 246, 0.08);
+  box-shadow: 0 16px 45px rgba(4, 12, 25, 0.35);
+  backdrop-filter: blur(12px);
   z-index: 2;
   opacity: 0;
   transform: translateY(30px);
@@ -60,13 +60,14 @@ a:hover,
 .hero::before {
   content: '';
   position: absolute;
-  inset: -25% -18% -30% -18%;
-  background: radial-gradient(circle at 20% 30%, rgba(56, 189, 248, 0.18), transparent 55%),
-              radial-gradient(circle at 80% 65%, rgba(59, 130, 246, 0.25), transparent 60%),
-              linear-gradient(140deg, rgba(9, 21, 41, 0.65) 10%, rgba(12, 39, 63, 0.35) 90%);
-  opacity: 0.85;
+  inset: -45% -40% -50% -40%;
+  background: radial-gradient(circle at 30% 28%, rgba(56, 189, 248, 0.18), transparent 70%),
+              radial-gradient(circle at 78% 62%, rgba(37, 99, 235, 0.16), transparent 72%),
+              linear-gradient(150deg, rgba(4, 12, 26, 0.55) 0%, rgba(4, 12, 26, 0.2) 55%, rgba(4, 12, 26, 0.55) 100%);
+  opacity: 0.55;
   pointer-events: none;
   z-index: 1;
+  mix-blend-mode: soft-light;
 }
 
 .hero__inner {
