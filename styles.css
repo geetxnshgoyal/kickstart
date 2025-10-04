@@ -98,6 +98,7 @@ a:hover,
   align-items: center;
   justify-content: center;
   gap: clamp(1.25rem, 4vw, 3rem);
+  flex-wrap: nowrap;
 }
 
 .hero__copy {
@@ -136,6 +137,9 @@ a:hover,
   width: clamp(6rem, 16vw, 9rem);
   aspect-ratio: 1 / 1;
   filter: drop-shadow(0 20px 40px rgba(3, 6, 18, 0.5));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .presenter__brand {
@@ -144,6 +148,8 @@ a:hover,
   background: #ffffff;
   border: var(--pixel-border) solid rgba(12, 59, 139, 0.85);
   box-shadow: 0 4px 0 rgba(12, 18, 44, 0.45);
+  align-items: center;
+  justify-content: center;
 }
 
 .presenter__logo {
@@ -951,24 +957,34 @@ h1 {
   }
 
   .hero__logos {
-    flex-direction: column;
-    gap: 1rem;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 0.65rem;
+  }
+
+  .presenter__brand,
+  .hero__logo--inline {
+    flex: 0 1 40%;
   }
 
   .presenter__brand {
-    padding: 0.75rem 1rem;
+    padding: 0.6rem 0.75rem;
   }
 
   .presenter__logo {
-    width: clamp(140px, 45vw, 190px);
+    width: 100%;
+    max-width: 160px;
   }
 
   .hero__x {
-    font-size: clamp(1.3rem, 6vw, 1.8rem);
+    flex: 0 0 auto;
+    font-size: clamp(1.1rem, 5vw, 1.5rem);
   }
 
   .hero__logo--inline {
-    width: clamp(5.4rem, 30vw, 7rem);
+    width: clamp(5rem, 26vw, 6.2rem);
   }
 
   .hero__copy {
@@ -989,10 +1005,6 @@ h1 {
 
   .hero__inner {
     gap: 1.8rem;
-  }
-
-  .presenter__logo {
-    width: clamp(140px, 46vw, 200px);
   }
 
   .hero__visual {
@@ -1081,11 +1093,11 @@ h1 {
   }
 
   .hero__logos {
-    gap: 0.85rem;
+    gap: 0.5rem;
   }
 
   .presenter__logo {
-    width: clamp(130px, 60vw, 170px);
+    max-width: 150px;
   }
 
   .hero__stats li {
