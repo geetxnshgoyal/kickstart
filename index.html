@@ -8,20 +8,20 @@
   <meta name="robots" content="index, follow">
   <meta name="author" content="Kickstart">
   <link rel="canonical" href="https://justkickstart.me/kickstart-hackathon">
-  <meta name="theme-color" content="#0f172a">
+  <meta name="theme-color" content="#070a1a">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_US">
   <meta property="og:url" content="https://justkickstart.me/kickstart-hackathon">
   <meta property="og:title" content="Kickstart Hackathon 2025 | Smart Campus Sprint">
   <meta property="og:description" content="Join the Kickstart Hackathon 2025 to prototype smart campus innovations in a single-day onsite sprint with mentorship, resources, and prizes.">
   <meta property="og:image" content="https://justkickstart.me/logo.svg">
-  <meta property="og:image:alt" content="Kickstart Hackathon 2025 gradient logo">
+  <meta property="og:image:alt" content="Kickstart Hackathon 2025 pixel logo">
   <meta property="og:site_name" content="Kickstart">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Kickstart Hackathon 2025 | Smart Campus Sprint">
   <meta name="twitter:description" content="Prototype smart campus ideas in 14 hours with Kickstart mentors, resources, and prizes.">
   <meta name="twitter:image" content="https://justkickstart.me/logo.svg">
-  <meta name="twitter:image:alt" content="Kickstart Hackathon 2025 gradient logo">
+  <meta name="twitter:image:alt" content="Kickstart Hackathon 2025 pixel logo">
   <title>Kickstart Hackathon 2025 | Smart Campus Sprint</title>
   <link rel="icon" type="image/svg+xml" href="logo.svg">
   <link rel="stylesheet" href="styles.css">
@@ -104,6 +104,16 @@
       ]
     }
   </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Kickstart",
+      "url": "https://justkickstart.me",
+      "logo": "https://justkickstart.me/logo.svg",
+      "sameAs": []
+    }
+  </script>
 </head>
 <body>
   <div class="background" aria-hidden="true">
@@ -133,7 +143,12 @@
   <header class="hero">
     <div class="hero__inner">
       <div class="hero__copy">
-        <p class="badge">NST Presents</p>
+        <div class="presenter">
+          <div class="presenter__brand">
+            <img src="nst-logo.png" alt="Newton School of Technology logo" class="presenter__logo">
+          </div>
+          <p class="presenter__caption">Presents</p>
+        </div>
         <h1>Kickstart Hackathon 2025</h1>
         <p class="subtitle">Co-create the future of smart campuses, from seamless mobility to connected classrooms, in a single-day onsite sprint. The brief drops live at kickoff&mdash;arrive ready to ideate, prototype, and present.</p>
         <div class="hero__cta">
@@ -156,25 +171,7 @@
         <span class="hero__particle hero__particle--two"></span>
         <span class="hero__particle hero__particle--three"></span>
         <div class="hero__logo">
-          <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="presentation">
-            <defs>
-              <linearGradient id="kickstart-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#38bdf8" />
-                <stop offset="50%" stop-color="#8b5cf6" />
-                <stop offset="100%" stop-color="#f472b6" />
-              </linearGradient>
-              <radialGradient id="kickstart-glow" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="rgba(56, 189, 248, 0.6)" />
-                <stop offset="60%" stop-color="rgba(14, 165, 233, 0.15)" />
-                <stop offset="100%" stop-color="rgba(2, 6, 23, 0)" />
-              </radialGradient>
-            </defs>
-            <circle class="logo-glow" cx="60" cy="60" r="52" fill="url(#kickstart-glow)" />
-            <circle class="logo-ring" cx="60" cy="60" r="48" fill="none" stroke="url(#kickstart-gradient)" stroke-width="4" stroke-linecap="round" />
-            <path class="logo-k" d="M40 30 V90 M40 60 L78 28 M40 60 L85 102" fill="none" stroke="url(#kickstart-gradient)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
-            <circle class="logo-node" cx="88" cy="34" r="6" />
-            <path class="logo-spark" d="M58 18 Q88 30 86 54" fill="none" stroke="rgba(148, 163, 184, 0.35)" stroke-width="2" stroke-linecap="round" />
-          </svg>
+          <img src="logo.svg" alt="Kickstart Hackathon pixel mark">
         </div>
       </div>
     </div>
