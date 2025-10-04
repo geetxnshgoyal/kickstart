@@ -933,7 +933,7 @@ h1 {
   }
 
   .hero {
-    padding: 3.2rem 1.6rem;
+    padding: 2.8rem 1.4rem 3.2rem;
   }
 
   h1 {
@@ -948,6 +948,37 @@ h1 {
   .section__content > h2 {
     font-size: clamp(1.6rem, 5vw, 2.2rem);
     text-shadow: 2px 2px 0 #03030b;
+  }
+
+  .hero__logos {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .presenter__brand {
+    padding: 0.75rem 1rem;
+  }
+
+  .presenter__logo {
+    width: clamp(140px, 45vw, 190px);
+  }
+
+  .hero__x {
+    font-size: clamp(1.3rem, 6vw, 1.8rem);
+  }
+
+  .hero__logo--inline {
+    width: clamp(5.4rem, 30vw, 7rem);
+  }
+
+  .hero__copy {
+    max-width: 32rem;
+    gap: 1.25rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    line-height: 1.55;
   }
 
   .hero__stats {
@@ -994,10 +1025,6 @@ h1 {
     padding: 1.25rem;
   }
 
-  .mission-card {
-    padding: 1.4rem 1.2rem;
-  }
-
   .guidelines li {
     padding: 0.75rem 0.9rem;
   }
@@ -1016,8 +1043,8 @@ h1 {
   }
 
   .countdown__unit {
-    min-width: 70px;
-    padding: 0.6rem 0.7rem;
+    min-width: 72px;
+    padding: 0.55rem 0.6rem;
   }
 }
 
@@ -1027,7 +1054,7 @@ h1 {
   }
 
   .hero {
-    padding: 2.85rem 1rem 3.1rem;
+    padding: 2.6rem 0.9rem 2.9rem;
   }
 
   h1 {
@@ -1053,8 +1080,12 @@ h1 {
     max-width: none;
   }
 
+  .hero__logos {
+    gap: 0.85rem;
+  }
+
   .presenter__logo {
-    width: clamp(130px, 60vw, 190px);
+    width: clamp(130px, 60vw, 170px);
   }
 
   .hero__stats li {
@@ -1079,6 +1110,7 @@ h1 {
   .countdown__unit {
     min-width: 0;
     width: 100%;
+    padding: 0.45rem 0.4rem;
   }
 
   .hero__visual {
