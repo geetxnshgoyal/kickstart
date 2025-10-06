@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register | Kickstart Hackathon 2025</title>
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-shell">
+  <header class="page-header">
+    <a class="page-header__brand" href="index.html">
+      <span class="page-header__logo" aria-hidden="true">KS</span>
+      <span class="sr-only">Kickstart Home</span>
+    </a>
+  </header>
+
+  <main class="page-main">
+    <section class="form-section">
+      <div class="form-section__intro">
+        <h1>Kickstart Registration</h1>
+        <p>Select the appropriate option below and share the full details so we can reserve your spot.</p>
+      </div>
+
+      <div class="form-toggle" role="tablist" aria-label="Registration type">
+        <button type="button" class="form-toggle__button is-active" data-target="individual" role="tab" aria-selected="true">Individual</button>
+        <button type="button" class="form-toggle__button" data-target="team" role="tab" aria-selected="false">Team</button>
+      </div>
+
+      <div class="form-panels">
+        <form id="individual-form" class="form-card" data-form="individual" novalidate>
+          <h2>Solo Participant</h2>
+          <div class="form-grid">
+            <label class="form-field">
+              <span>Name *</span>
+              <input type="text" name="name" autocomplete="name" required>
+            </label>
+            <label class="form-field">
+              <span>Email *</span>
+              <input type="email" name="email" autocomplete="email" required>
+            </label>
+            <label class="form-field">
+              <span>Phone</span>
+              <input type="tel" name="phone" autocomplete="tel" inputmode="tel" pattern="[0-9+()\-\s]*">
+            </label>
+            <label class="form-field">
+              <span>GitHub / Portfolio</span>
+              <input type="url" name="profileLink" placeholder="https://">
+            </label>
+          </div>
+          <label class="form-field">
+            <span>What should we know about you? (Optional)</span>
+            <textarea name="notes" rows="3" placeholder="Links, domains, or achievements you are proud of"></textarea>
+          </label>
+          <button type="submit" class="button">Submit Registration</button>
+        </form>
+
+        <form id="team-form" class="form-card is-hidden" data-form="team" novalidate>
+          <h2>Team Registration</h2>
+          <label class="form-field">
+            <span>Team Name *</span>
+            <input type="text" name="teamName" required>
+          </label>
+
+          <fieldset class="form-fieldset">
+            <legend>Team Lead *</legend>
+            <div class="form-grid">
+              <label class="form-field">
+                <span>Name *</span>
+                <input type="text" name="leaderName" required>
+              </label>
+              <label class="form-field">
+                <span>Email *</span>
+                <input type="email" name="leaderEmail" required>
+              </label>
+              <label class="form-field">
+                <span>Phone</span>
+                <input type="tel" name="leaderPhone" inputmode="tel" pattern="[0-9+()\-\s]*">
+              </label>
+              <label class="form-field">
+                <span>GitHub / Portfolio</span>
+                <input type="url" name="leaderProfile" placeholder="https://">
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-fieldset">
+            <legend>Additional Members (up to 3)</legend>
+            <p class="form-hint">Leave fields blank if you do not have all members confirmed yet.</p>
+            <div class="form-grid form-grid--members">
+              <div class="member-card" data-member="2">
+                <h3>Member 2</h3>
+                <label class="form-field">
+                  <span>Name</span>
+                  <input type="text" name="member2Name">
+                </label>
+                <label class="form-field">
+                  <span>Email</span>
+                  <input type="email" name="member2Email">
+                </label>
+                <label class="form-field">
+                  <span>Phone</span>
+                  <input type="tel" name="member2Phone" inputmode="tel" pattern="[0-9+()\-\s]*">
+                </label>
+                <label class="form-field">
+                  <span>GitHub / Portfolio</span>
+                  <input type="url" name="member2Profile" placeholder="https://">
+                </label>
+              </div>
+              <div class="member-card" data-member="3">
+                <h3>Member 3</h3>
+                <label class="form-field">
+                  <span>Name</span>
+                  <input type="text" name="member3Name">
+                </label>
+                <label class="form-field">
+                  <span>Email</span>
+                  <input type="email" name="member3Email">
+                </label>
+                <label class="form-field">
+                  <span>Phone</span>
+                  <input type="tel" name="member3Phone" inputmode="tel" pattern="[0-9+()\-\s]*">
+                </label>
+                <label class="form-field">
+                  <span>GitHub / Portfolio</span>
+                  <input type="url" name="member3Profile" placeholder="https://">
+                </label>
+              </div>
+              <div class="member-card" data-member="4">
+                <h3>Member 4</h3>
+                <label class="form-field">
+                  <span>Name</span>
+                  <input type="text" name="member4Name">
+                </label>
+                <label class="form-field">
+                  <span>Email</span>
+                  <input type="email" name="member4Email">
+                </label>
+                <label class="form-field">
+                  <span>Phone</span>
+                  <input type="tel" name="member4Phone" inputmode="tel" pattern="[0-9+()\-\s]*">
+                </label>
+                <label class="form-field">
+                  <span>GitHub / Portfolio</span>
+                  <input type="url" name="member4Profile" placeholder="https://">
+                </label>
+              </div>
+            </div>
+          </fieldset>
+
+          <label class="form-field">
+            <span>Anything else we should know? (Optional)</span>
+            <textarea name="notes" rows="3" placeholder="Tell us about the idea, domain focus, or logistics"></textarea>
+          </label>
+
+          <button type="submit" class="button">Submit Team</button>
+        </form>
+      </div>
+
+      <div class="form-alert" role="status" aria-live="polite" hidden></div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <p>&copy; 2025 Kickstart. All rights reserved.</p>
+  </footer>
+
+  <script src="register.js" defer></script>
+</body>
+</html>

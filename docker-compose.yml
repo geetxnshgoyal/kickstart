@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  kickstart:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - ADMIN_KEY=${ADMIN_KEY}
+      - GOOGLE_APPLICATION_CREDENTIALS=/run/secrets/firebase_credentials.json
+    volumes:
+      - ./:/usr/src/app:ro
+    secrets:
+      - firebase_credentials
+secrets:
+  firebase_credentials:
+    file: ./kickstart-11324-firebase-adminsdk-fbsvc-97c2decb15.json

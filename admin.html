@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organizer Console | Kickstart</title>
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-shell">
+  <header class="page-header">
+    <a class="page-header__brand" href="index.html">
+      <span class="page-header__logo" aria-hidden="true">KS</span>
+      <span class="sr-only">Kickstart Home</span>
+    </a>
+    <a class="page-header__link" href="register.html">Back to registration</a>
+  </header>
+
+  <main class="page-main">
+    <section class="admin-card">
+      <div class="admin-card__header">
+        <h1>Organizer Console</h1>
+        <p>Review registrations, team up solo hackers, and plan day-of logistics.</p>
+      </div>
+
+      <form class="admin-auth" id="admin-auth-form" autocomplete="off">
+        <label class="form-field">
+          <span>Admin Access Key *</span>
+          <input type="password" name="adminKey" id="admin-key" required placeholder="Paste the shared secret">
+        </label>
+        <div class="admin-auth__meta">
+          <label class="form-field form-field--inline">
+            <input type="checkbox" id="remember-key" />
+            <span>Remember key on this device</span>
+          </label>
+          <div id="admin-key-info" class="note" aria-live="polite"></div>
+        </div>
+        <div class="admin-auth__actions">
+          <button type="submit" class="button">Unlock Dashboard</button>
+          <button type="button" class="button button--ghost" id="clear-key">Clear saved key</button>
+        </div>
+      </form>
+
+      <div class="admin-dashboard is-disabled" aria-disabled="true">
+        <div class="admin-tabs" role="tablist" aria-label="Admin views">
+          <button class="admin-tab is-active" type="button" role="tab" data-view="individuals" aria-selected="true">Individuals</button>
+          <button class="admin-tab" type="button" role="tab" data-view="teams" aria-selected="false">Teams</button>
+        </div>
+
+        <div class="admin-toolbar">
+          <div class="admin-toolbar__actions">
+            <button type="button" class="button button--ghost" id="refresh-view">Refresh</button>
+            <label class="form-field form-field--inline" style="margin-left:8px;">
+              <span class="sr-only">Export format</span>
+              <select id="export-format" aria-label="Export format">
+                <option value="csv">CSV</option>
+                <option value="xlsx">XLSX</option>
+              </select>
+            </label>
+            <button type="button" class="button button--ghost" id="export-view">Download</button>
+          </div>
+          <span class="admin-toolbar__status" id="view-status" role="status"></span>
+        </div>
+
+        <section class="admin-view" id="view-individuals" data-view="individuals">
+          <div class="team-up" aria-live="polite">
+            <div>
+              <label class="form-field">
+                <span>New team name *</span>
+                <input type="text" id="team-up-name" placeholder="Enter a team name">
+              </label>
+            </div>
+            <div class="team-up__actions">
+              <button type="button" class="button" id="team-up-create" disabled>Create team from selection</button>
+            </div>
+            <p class="team-up__hint">Pick between two and four solo registrations, choose a lead, and instantly form a team.</p>
+          </div>
+          <div class="data-empty" hidden>No solo registrations yet.</div>
+          <ul class="card-list" id="individual-list"></ul>
+        </section>
+
+        <section class="admin-view is-hidden" id="view-teams" data-view="teams">
+          <div class="data-empty" hidden>No team registrations yet.</div>
+          <ul class="card-list" id="team-list"></ul>
+        </section>
+      </div>
+
+      <div class="form-alert" id="admin-alert" role="status" hidden></div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <p>&copy; 2025 Kickstart. Organizers only.</p>
+  </footer>
+
+  <script src="admin.js" defer></script>
+</body>
+</html>

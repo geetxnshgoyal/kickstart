@@ -1,0 +1,33 @@
+{
+  "name": "kickstart",
+  "version": "1.0.0",
+  "description": "Kickstart hackathon landing + registration backend",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "NODE_ENV=development node server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geetxnshgoyal/kickstart.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/geetxnshgoyal/kickstart/issues"
+  },
+  "homepage": "https://github.com/geetxnshgoyal/kickstart#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "firebase-admin": "^13.5.0",
+    "helmet": "^7.0.0",
+    "express-rate-limit": "^7.0.0",
+    "morgan": "^1.10.0",
+    "exceljs": "^4.3.0"
+    ,"serverless-http": "^3.0.0"
+  }
+}
