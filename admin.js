@@ -1,4 +1,5 @@
 (function () {
+  // ==== DOM ELEMENTS ====
   const authForm = document.getElementById('admin-auth-form');
   const adminKeyInput = document.getElementById('admin-key');
   const clearKeyButton = document.getElementById('clear-key');
@@ -17,8 +18,10 @@
   const emptyIndividual = document.querySelector('#view-individuals .data-empty');
   const emptyTeams = document.querySelector('#view-teams .data-empty');
 
+  // ==== CONSTANTS ====
   const MAX_TEAM_SELECTION = 4;
 
+  // ==== APP STATE ====
   const state = {
     adminKey: '',
     view: 'individuals',
@@ -28,10 +31,12 @@
     leaderParticipantId: null
   };
 
-  // Build absolute API URLs using the page origin to avoid wrong-origin requests
-  const API_BASE = (typeof window !== 'undefined' && window.location && window.location.origin) ? window.location.origin : '';
+  // ==== UTILITIES ====
+  const API_BASE = (typeof window !== 'undefined' && window.location && window.location.origin)
+    ? window.location.origin
+    : '';
+
   function api(path) {
-    // ensure leading slash
     if (!path.startsWith('/')) path = `/${path}`;
     return `${API_BASE}${path}`;
   }
@@ -42,7 +47,7 @@
       .replace(/"/g, '&quot;');
   }
 
-  // Admin status banner
+  // ==== ADMIN STATUS BAR ====
   const adminStatusEl = document.createElement('div');
   adminStatusEl.id = 'admin-status';
   adminStatusEl.style.margin = '12px 0';
@@ -70,7 +75,7 @@
         adminStatusEl.style.background = '#ff3b3022';
         adminStatusEl.style.color = '#ff3b30';
       }
-    } catch (err) {
+    } catch {
       adminStatusEl.style.display = 'block';
       adminStatusEl.textContent = 'Status unavailable';
       adminStatusEl.style.background = '#ffcc0022';
@@ -78,11 +83,12 @@
     }
   }
 
-  // Add small CSS rule for present seat highlight
+  // ==== CSS RULE FOR SEAT HIGHLIGHT ====
   const style = document.createElement('style');
   style.textContent = `.seat-present { background: #ffc0e4; border-radius: 4px; padding: 4px; }`;
   document.head.appendChild(style);
 
+  // ==== ALERT SYSTEM ====
   function showAlert(message, variant = 'info') {
     adminAlert.hidden = false;
     adminAlert.textContent = message;
@@ -95,18 +101,13 @@
     delete adminAlert.dataset.variant;
   }
 
-  function setDashboardEnabled(enabled) {
-    dashboard.classList.toggle('is-disabled', !enabled);
-    dashboard.setAttribute('aria-disabled', String(!enabled));
-  }
-
+  // ==== ADMIN KEY STORAGE ====
   function saveAdminKey(key) {
     state.adminKey = key;
     if (rememberKeyCheckbox && rememberKeyCheckbox.checked) {
       localStorage.setItem('kickstart-admin-key', key);
       adminKeyInfo.textContent = 'Key saved to device.';
     } else {
-      // do not persist
       localStorage.removeItem('kickstart-admin-key');
       adminKeyInfo.textContent = 'Key in memory for this session only.';
     }
@@ -126,6 +127,12 @@
     return false;
   }
 
+  // ==== DASHBOARD CONTROL ====
+  function setDashboardEnabled(enabled) {
+    dashboard.classList.toggle('is-disabled', !enabled);
+    dashboard.setAttribute('aria-disabled', String(!enabled));
+  }
+
   async function unlockDashboard(event) {
     event.preventDefault();
     clearAlert();
@@ -136,13 +143,13 @@
       return;
     }
 
-    state.adminKey = key;
     saveAdminKey(key);
     setDashboardEnabled(true);
     showAlert('Dashboard unlocked.', 'success');
     await loadView(state.view);
   }
 
+  // ==== SELECTION / TEAM-UP ====
   function resetSelection() {
     state.selectedParticipants.clear();
     state.leaderParticipantId = null;
@@ -154,7 +161,6 @@
   function updateSelectionUI() {
     const selectionSize = state.selectedParticipants.size;
     const withinLimit = selectionSize >= 2 && selectionSize <= MAX_TEAM_SELECTION;
-
     teamUpCreateButton.disabled = !withinLimit || !teamUpName.value.trim();
 
     const leaderRadios = individualList.querySelectorAll('.select-leader');
@@ -166,6 +172,7 @@
     });
   }
 
+  // ==== VIEW HANDLING ====
   function setView(view) {
     state.view = view;
     tabs.forEach((tab) => {
@@ -185,37 +192,21 @@
   async function loadView(view) {
     try {
       const response = await fetch(api(`/api/admin/registrations?view=${view}`), {
-        headers: {
-          'x-admin-key': state.adminKey
-        }
+        headers: { 'x-admin-key': state.adminKey }
       });
 
       if (response.status === 401) {
-        // Do not remove the saved key on 401 — keep it persisted so the admin
-        // can re-check or clear it manually. Show a clear error instead.
         showAlert('Access denied: admin key rejected by server. Check or clear the saved key.', 'error');
         return;
       }
 
-      // Ensure the server returned JSON. If not, read the raw text to aid debugging.
       const contentType = response.headers.get('content-type') || '';
-      let data;
       if (!contentType.includes('application/json')) {
-        const text = await response.text();
-        console.error('Expected JSON but server returned:', text);
-        throw new Error(`Server returned non-JSON response: ${text.slice(0, 1000)}`);
+        throw new Error('Server returned non-JSON response.');
       }
 
-      try {
-        data = await response.json();
-      } catch (parseErr) {
-        const raw = await response.text().catch(() => '<<unavailable>>');
-        console.error('Failed to parse JSON response:', parseErr, 'raw response:', raw);
-        throw new Error('Invalid JSON from server. See console for full response.');
-      }
-      if (!response.ok) {
-        throw new Error(data?.error || 'Unable to fetch data');
-      }
+      const data = await response.json();
+      if (!response.ok) throw new Error(data?.error || 'Unable to fetch data');
 
       const teams = Array.isArray(data.teams) ? data.teams : [];
       if (view === 'individuals') {
@@ -230,18 +221,18 @@
     } catch (error) {
       console.error('Load view failed:', error);
       viewStatus.textContent = 'Error loading data.';
-      showAlert(error.message || 'Unable to load data. Try again.', 'error');
+      showAlert(error.message || 'Unable to load data.', 'error');
     }
-    // refresh admin status indicator after each load
-    try { refreshAdminStatus(); } catch (e) { /* ignore */ }
+
+    try { refreshAdminStatus(); } catch {}
   }
 
+  // ==== RENDER FUNCTIONS ====
   function renderIndividuals() {
-    // reset selection state
     state.selectedParticipants.clear();
     state.leaderParticipantId = null;
 
-    if (!Array.isArray(state.individuals) || state.individuals.length === 0) {
+    if (!state.individuals.length) {
       individualList.innerHTML = '';
       emptyIndividual.hidden = false;
       updateSelectionUI();
@@ -249,65 +240,36 @@
     }
 
     emptyIndividual.hidden = true;
-
-    const cards = state.individuals.map((item) => {
-      // The API may return several shapes: an object with `.participants` array,
-      // a wrapper with `{ participant: {...} }`, or a single participant object.
-      let participant = null;
-
-      if (item && Array.isArray(item.participants) && item.participants.length) {
-        participant = item.participants[0];
-      } else if (item && item.participant) {
-        participant = item.participant;
-      } else if (item && (item.id || item.name)) {
-        participant = item; // already a participant
-      }
-
-      if (!participant || !participant.id) return '';
-
-      // coerce id to string for dataset consistency
-      const participantId = String(participant.id);
-      const checkboxId = `participant-${participantId}`;
-      const leaderId = `leader-${participantId}`;
-
-      const phoneLine = participant.phone ? `<span>${participant.phone}</span>` : '';
-      const profileLine = participant.profile
-        ? `<a href="${participant.profile}" target="_blank" rel="noopener">Profile ↗</a>`
-        : '';
+    individualList.innerHTML = state.individuals.map((item) => {
+      let p = item?.participants?.[0] || item?.participant || item;
+      if (!p?.id) return '';
+      const pid = String(p.id);
+      const phone = p.phone ? `<span>${p.phone}</span>` : '';
+      const profile = p.profile ? `<a href="${p.profile}" target="_blank" rel="noopener">Profile ↗</a>` : '';
 
       return `
-        <li class="card card--individual" data-participant-id="${escapeAttribute(participantId)}">
+        <li class="card card--individual" data-participant-id="${escapeAttribute(pid)}">
           <div class="card__select">
-            <input type="checkbox" class="select-participant" id="${escapeAttribute(checkboxId)}" data-participant-id="${escapeAttribute(participantId)}">
-            <label for="${escapeAttribute(checkboxId)}">Select</label>
+            <input type="checkbox" class="select-participant" id="participant-${pid}" data-participant-id="${pid}">
+            <label for="participant-${pid}">Select</label>
           </div>
           <div class="card__body">
-            <h3>${escapeAttribute(participant.name || 'Unnamed')}</h3>
-            <p>${escapeAttribute(participant.email || '')}</p>
-            <div class="card__meta">
-              ${phoneLine}
-              ${profileLine}
-            </div>
+            <h3>${escapeAttribute(p.name || 'Unnamed')}</h3>
+            <p>${escapeAttribute(p.email || '')}</p>
+            <div class="card__meta">${phone}${profile}</div>
             <span class="tag">Registered solo</span>
           </div>
           <div class="card__leader">
-            <label for="${escapeAttribute(leaderId)}">
-              <input type="radio" class="select-leader" name="team-leader" id="${escapeAttribute(leaderId)}" data-participant-id="${escapeAttribute(participantId)}" disabled>
-              Lead
-            </label>
+            <label><input type="radio" class="select-leader" name="team-leader" data-participant-id="${pid}" disabled> Lead</label>
           </div>
-        </li>
-      `;
+        </li>`;
+    }).join('');
+
+    individualList.querySelectorAll('.select-participant').forEach(cb => {
+      cb.addEventListener('change', onParticipantToggle);
     });
 
-    individualList.innerHTML = cards.join('');
-
-    // wire up controls
-    individualList.querySelectorAll('.select-participant').forEach((checkbox) => {
-      checkbox.addEventListener('change', onParticipantToggle);
-    });
-
-    individualList.querySelectorAll('.select-leader').forEach((radio) => {
+    individualList.querySelectorAll('.select-leader').forEach(radio => {
       radio.addEventListener('change', () => {
         state.leaderParticipantId = String(radio.dataset.participantId);
         updateSelectionUI();
@@ -317,29 +279,23 @@
     updateSelectionUI();
   }
 
-  function onParticipantToggle(event) {
-    const checkbox = event.currentTarget;
-    const participantId = checkbox.dataset.participantId;
-
-    if (checkbox.checked) {
+  function onParticipantToggle(e) {
+    const id = e.currentTarget.dataset.participantId;
+    if (e.currentTarget.checked) {
       if (state.selectedParticipants.size >= MAX_TEAM_SELECTION) {
-        checkbox.checked = false;
-        showAlert(`You can only group up to ${MAX_TEAM_SELECTION} solo participants at once.`, 'error');
+        e.currentTarget.checked = false;
+        showAlert(`You can only group up to ${MAX_TEAM_SELECTION} participants.`, 'error');
         return;
       }
-
-      state.selectedParticipants.add(participantId);
-      if (!state.leaderParticipantId) {
-        state.leaderParticipantId = participantId;
-      }
+      state.selectedParticipants.add(id);
+      if (!state.leaderParticipantId) state.leaderParticipantId = id;
     } else {
-      state.selectedParticipants.delete(participantId);
-      if (state.leaderParticipantId === participantId) {
-        const firstSelected = state.selectedParticipants.values().next().value;
-        state.leaderParticipantId = firstSelected !== undefined ? firstSelected : null;
+      state.selectedParticipants.delete(id);
+      if (state.leaderParticipantId === id) {
+        const next = state.selectedParticipants.values().next().value;
+        state.leaderParticipantId = next ?? null;
       }
     }
-
     updateSelectionUI();
   }
 
@@ -351,268 +307,124 @@
     }
 
     emptyTeams.hidden = true;
-
-    const cards = state.teams.map((team) => {
+    teamList.innerHTML = state.teams.map(team => {
       const participants = Array.isArray(team.participants) ? team.participants : [];
-      const leader = participants.find((member) => member.role === 'leader') || participants[0];
-      const others = participants.filter((member) => member.id !== leader?.id);
-
-      const seatValue = team.seat_number || '';
-      const seatLabel = seatValue ? `Seat ${seatValue}` : 'Seat not assigned';
-      const attendanceLabel = team.attendance_marked ? 'Present' : 'Not checked-in';
-
-      const sourceMap = {
-        individual_form: 'Solo',
-        team_form: 'Team',
-        admin_team_up: 'Formed'
-      };
-      const sourceLabel = sourceMap[team.source] || 'Unknown';
-
-      const created = team.created_at
-        ? new Date(team.created_at).toLocaleString()
-        : 'Pending';
-
-      const seatInputId = `seat-${team.id}`;
-
-      const membersList = others
-        .map((member) => {
-          const profileLink = member.profile
-            ? `<a href="${member.profile}" target="_blank" rel="noopener">Profile ↗</a>`
-            : '';
-          const phoneLine = member.phone ? `<span>${member.phone}</span>` : '';
-          return `
-            <li>
-              <strong>${member.name}</strong>
-              <span>${member.email || 'No email'}</span>
-              ${phoneLine}
-              ${profileLink}
-            </li>
-          `;
-        })
-        .join('');
-
-      const memberBlock = membersList
-        ? `<ul class="member-list" aria-label="Team members">${membersList}</ul>`
-        : '<p class="card__empty">No additional members listed.</p>';
-
-      const leaderProfile = leader?.profile
-        ? `<a href="${leader.profile}" target="_blank" rel="noopener">Profile ↗</a>`
+      const leader = participants.find(p => p.role === 'leader') || participants[0];
+      const others = participants.filter(p => p.id !== leader?.id);
+      const seat = team.seat_number || '';
+      const markLabel = team.attendance_marked ? 'Reassign seat' : 'Mark present';
+      const clearBtn = team.attendance_marked
+        ? `<button class="button button--ghost" data-action="clear" data-team-id="${team.id}">Clear attendance</button>`
         : '';
-      const leaderPhone = leader?.phone ? `<span>${leader.phone}</span>` : '';
-
-      const markButtonLabel = team.attendance_marked ? 'Reassign seat' : 'Mark present';
-      const secondaryButton = team.attendance_marked
-        ? `<button type="button" class="button button--ghost" data-action="clear" data-team-id="${team.id}">Clear attendance</button>`
-        : '';
-      const seatValueAttr = escapeAttribute(seatValue);
 
       return `
         <li class="card card--team" data-team-id="${team.id}">
           <header class="card__header">
-            <div>
-              <h3>${team.name}</h3>
-              <span class="tag">${sourceLabel}</span>
-            </div>
-            <div class="card__status">
-              <span>${seatLabel}</span>
-              <span>${attendanceLabel}</span>
-            </div>
+            <h3>${team.name}</h3>
+            <span class="tag">${team.source || 'Unknown'}</span>
           </header>
           <div class="card__body">
-            <div class="lead-info">
-              <strong>Lead:</strong>
-              <span>${leader?.name || 'Unknown'}</span>
-              <span>${leader?.email || 'No email'}</span>
-              ${leaderPhone}
-              ${leaderProfile}
-            </div>
-            ${memberBlock}
+            <strong>Lead:</strong> ${leader?.name || 'Unknown'}
           </div>
           <footer class="card__footer">
-            <div class="card__meta">
-              <span>Registered: ${created}</span>
-            </div>
-            <div class="card__actions">
-              <label class="seat-field" for="${seatInputId}">
-                <span>Seat / Room</span>
-                <input type="text" class="seat-input ${team.attendance_marked ? 'seat-present' : ''}" id="${seatInputId}" data-team-id="${team.id}" value="${seatValueAttr}" placeholder="e.g. Lab-42">
-              </label>
-              <button type="button" class="button" data-action="mark" data-team-id="${team.id}">${markButtonLabel}</button>
-              ${secondaryButton}
-            </div>
+            <label>Seat <input type="text" class="seat-input ${team.attendance_marked ? 'seat-present' : ''}" data-team-id="${team.id}" value="${escapeAttribute(seat)}"></label>
+            <button class="button" data-action="mark" data-team-id="${team.id}">${markLabel}</button>
+            ${clearBtn}
           </footer>
-        </li>
-      `;
-    });
+        </li>`;
+    }).join('');
 
-    teamList.innerHTML = cards.join('');
-
-    teamList.querySelectorAll('button[data-action="mark"]').forEach((button) => {
-      button.addEventListener('click', async (event) => {
-        const teamId = event.currentTarget.dataset.teamId;
-        const seatInput = teamList.querySelector(`.seat-input[data-team-id="${teamId}"]`);
-        const seatValue = seatInput ? seatInput.value.trim() : '';
-        await handleAttendance(teamId, true, seatValue);
+    teamList.querySelectorAll('button[data-action="mark"]').forEach(btn => {
+      btn.addEventListener('click', async e => {
+        const id = e.currentTarget.dataset.teamId;
+        const seatInput = teamList.querySelector(`.seat-input[data-team-id="${id}"]`);
+        await handleAttendance(id, true, seatInput?.value.trim() || '');
       });
     });
 
-    teamList.querySelectorAll('button[data-action="clear"]').forEach((button) => {
-      button.addEventListener('click', async (event) => {
-        const teamId = event.currentTarget.dataset.teamId;
-        await handleAttendance(teamId, false);
-      });
+    teamList.querySelectorAll('button[data-action="clear"]').forEach(btn => {
+      btn.addEventListener('click', async e => handleAttendance(e.currentTarget.dataset.teamId, false));
     });
   }
 
+  // ==== ATTENDANCE ====
   async function handleAttendance(teamId, present, seatNumber = '') {
     clearAlert();
     try {
-      const response = await fetch(api('/api/admin/attendance'), {
+      const res = await fetch(api('/api/admin/attendance'), {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-admin-key': state.adminKey
-        },
+        headers: { 'Content-Type': 'application/json', 'x-admin-key': state.adminKey },
         body: JSON.stringify({ teamId, present, seatNumber })
       });
-
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error(data?.error || 'Unable to update attendance');
-      }
-
-      const message = present
-        ? `Team marked present. Seat ${data.seatNumber || 'pending'} assigned.`
-        : 'Attendance cleared for team.';
-      showAlert(message, 'success');
-
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.error || 'Unable to update attendance');
+      showAlert(present ? `Team marked present (Seat ${data.seatNumber || 'pending'})` : 'Attendance cleared', 'success');
       await loadView('teams');
-    } catch (error) {
-      console.error('Attendance update failed:', error);
-      showAlert(error.message || 'Unable to update attendance.', 'error');
+    } catch (err) {
+      showAlert(err.message || 'Unable to update attendance.', 'error');
     }
   }
 
+  // ==== EXPORT ====
   async function exportCurrentView() {
-    if (!state.adminKey) {
-      showAlert('Unlock the dashboard before exporting data.', 'error');
-      return;
-    }
-
+    if (!state.adminKey) return showAlert('Unlock the dashboard first.', 'error');
     clearAlert();
-
     try {
       const format = (document.getElementById('export-format') || {}).value || 'csv';
-      const response = await fetch(api(`/api/admin/export?view=${state.view}&format=${encodeURIComponent(format)}`), {
-        headers: {
-          'x-admin-key': state.adminKey
-        }
+      const res = await fetch(api(`/api/admin/export?view=${state.view}&format=${encodeURIComponent(format)}`), {
+        headers: { 'x-admin-key': state.adminKey }
       });
-
-      if (!response.ok) {
-        let errorMessage = 'Unable to export registrations.';
-        try {
-          const errorBody = await response.json();
-          errorMessage = errorBody?.error || errorMessage;
-        } catch (parseError) {
-          // ignore parse failure and use default message
-        }
-        throw new Error(errorMessage);
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || 'Export failed');
       }
-
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
-      const stamp = new Date().toISOString().slice(0, 10);
       link.href = url;
-      link.download = `kickstart-${state.view}-export-${stamp}.csv`;
+      link.download = `kickstart-${state.view}-${new Date().toISOString().slice(0, 10)}.csv`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
-
+      URL.revokeObjectURL(url);
       showAlert('CSV downloaded successfully.', 'success');
-    } catch (error) {
-      console.error('Export failed:', error);
-      showAlert(error.message || 'Unable to download CSV.', 'error');
+    } catch (err) {
+      showAlert(err.message || 'Unable to download CSV.', 'error');
     }
   }
 
+  // ==== TEAM CREATION ====
   async function submitTeamUp() {
     clearAlert();
-
     const name = teamUpName.value.trim();
-    if (state.selectedParticipants.size < 2) {
-      showAlert('Select at least two participants to form a team.', 'error');
-      return;
-    }
-
-    if (!name) {
-      showAlert('Name the new team before creating it.', 'error');
-      return;
-    }
-
-    const participantIds = Array.from(state.selectedParticipants);
-    if (participantIds.length > MAX_TEAM_SELECTION) {
-      showAlert(`Select no more than ${MAX_TEAM_SELECTION} solo participants.`, 'error');
-      return;
-    }
-    const leaderId = state.leaderParticipantId || participantIds[0];
-
+    if (state.selectedParticipants.size < 2) return showAlert('Select at least two participants.', 'error');
+    if (!name) return showAlert('Enter a team name.', 'error');
+    const ids = [...state.selectedParticipants];
+    if (ids.length > MAX_TEAM_SELECTION) return showAlert(`Max ${MAX_TEAM_SELECTION} participants.`, 'error');
+    const leader = state.leaderParticipantId || ids[0];
     try {
       teamUpCreateButton.disabled = true;
       teamUpCreateButton.textContent = 'Creating…';
-
-      const response = await fetch(api('/api/admin/team-up'), {
+      const res = await fetch(api('/api/admin/team-up'), {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-admin-key': state.adminKey
-        },
-        body: JSON.stringify({
-          participantIds,
-          teamName: name,
-          leaderParticipantId: leaderId
-        })
+        headers: { 'Content-Type': 'application/json', 'x-admin-key': state.adminKey },
+        body: JSON.stringify({ participantIds: ids, teamName: name, leaderParticipantId: leader })
       });
-
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error(data?.error || 'Unable to create team');
-      }
-
-      const newTeamId = data?.teamId || data?.newTeamId;
-      showAlert('Team created successfully from the selected participants.', 'success');
-
-      // Offer to mark the new team present and assign a seat immediately.
-      try {
-        if (newTeamId) {
-          const markNow = window.confirm('Mark the new team present now? Click OK to mark present and assign a seat, Cancel to skip.');
-          if (markNow) {
-            const seat = window.prompt('Enter a seat/room for this team (leave blank for automatic assignment):', '');
-            if (seat === null) {
-              // user cancelled prompt; do nothing
-            } else {
-              await handleAttendance(newTeamId, true, seat ? seat.trim() : '');
-            }
-          }
-        }
-      } catch (err) {
-        console.error('Auto-mark attendance failed:', err);
-      }
-
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.error || 'Unable to create team');
+      showAlert('Team created successfully.', 'success');
       resetSelection();
       await loadView('individuals');
       await loadView('teams');
-    } catch (error) {
-      console.error('Team up failed:', error);
-      showAlert(error.message || 'Unable to create team.', 'error');
+    } catch (err) {
+      showAlert(err.message || 'Unable to create team.', 'error');
     } finally {
       teamUpCreateButton.disabled = false;
       teamUpCreateButton.textContent = 'Create team from selection';
     }
   }
 
+  // ==== EVENT LISTENERS ====
   authForm.addEventListener('submit', unlockDashboard);
   clearKeyButton.addEventListener('click', () => {
     localStorage.removeItem('kickstart-admin-key');
@@ -620,25 +432,22 @@
     state.adminKey = '';
     setDashboardEnabled(false);
     clearKeyButton.hidden = true;
-    if (rememberKeyCheckbox) rememberKeyCheckbox.checked = false;
-    if (adminKeyInfo) adminKeyInfo.textContent = '';
+    rememberKeyCheckbox.checked = false;
+    adminKeyInfo.textContent = '';
     showAlert('Stored key cleared.', 'info');
   });
 
-  tabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      const view = tab.dataset.view;
-      if (view !== state.view) {
-        setView(view);
-      }
-    });
-  });
+  tabs.forEach(tab => tab.addEventListener('click', () => {
+    const view = tab.dataset.view;
+    if (view !== state.view) setView(view);
+  }));
 
   refreshButton.addEventListener('click', () => loadView(state.view));
   exportButton.addEventListener('click', exportCurrentView);
   teamUpName.addEventListener('input', updateSelectionUI);
   teamUpCreateButton.addEventListener('click', submitTeamUp);
 
+  // ==== INIT ====
   loadAdminKey();
   if (state.adminKey) {
     setDashboardEnabled(true);
