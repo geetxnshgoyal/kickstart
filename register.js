@@ -6,6 +6,15 @@
   };
   const alertBox = document.querySelector('.form-alert');
 
+  // ✅ Add keyboard navigation (ArrowLeft / ArrowRight) and ARIA roles
+  toggleButtons.forEach((btn) => {
+    btn.setAttribute('role', 'tab'); // ✅ added
+    btn.setAttribute('tabindex', btn.classList.contains('is-active') ? '0' : '-1'); // ✅ added
+  });
+
+  const toggleGroup = document.querySelector('.form-toggle');
+  if (toggleGroup) toggleGroup.setAttribute('role', 'tablist'); // ✅ added
+
   function setActiveForm(target) {
     Object.entries(forms).forEach(([key, form]) => {
       const isTarget = key === target;
@@ -16,7 +25,12 @@
       const isTarget = button.dataset.target === target;
       button.classList.toggle('is-active', isTarget);
       button.setAttribute('aria-selected', String(isTarget));
+      button.setAttribute('tabindex', isTarget ? '0' : '-1'); // ✅ added
     });
+
+    // ✅ Move focus to active toggle for accessibility
+    const activeButton = document.querySelector(`.form-toggle__button[data-target="${target}"]`);
+    if (activeButton) activeButton.focus();
 
     alertBox.hidden = true;
     alertBox.textContent = '';
@@ -24,6 +38,20 @@
 
   toggleButtons.forEach((button) => {
     button.addEventListener('click', () => setActiveForm(button.dataset.target));
+
+    // ✅ Allow arrow key navigation between toggles
+    button.addEventListener('keydown', (e) => {
+      const currentIndex = Array.from(toggleButtons).indexOf(button);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        const nextIndex =
+          e.key === 'ArrowRight'
+            ? (currentIndex + 1) % toggleButtons.length
+            : (currentIndex - 1 + toggleButtons.length) % toggleButtons.length;
+        const nextButton = toggleButtons[nextIndex];
+        setActiveForm(nextButton.dataset.target);
+      }
+    });
   });
 
   function showAlert(message, variant = 'info') {
@@ -47,7 +75,7 @@
       // ensure mobile keyboard suggestion and basic pattern exist
       input.setAttribute('inputmode', input.getAttribute('inputmode') || 'tel');
       if (!input.getAttribute('pattern')) {
-        input.setAttribute('pattern', '[0-9+()\-\\s]*');
+        input.setAttribute('pattern', '[0-9+()\\-\\s]*');
       }
 
       input.addEventListener('input', (e) => {
@@ -57,7 +85,6 @@
         const cleaned = sanitizePhoneValue(before);
         if (before !== cleaned) {
           cur.value = cleaned;
-          // try to restore caret roughly
           try { cur.setSelectionRange(pos - 1, pos - 1); } catch (err) { /* ignore */ }
         }
       });
@@ -67,7 +94,6 @@
         const text = (e.clipboardData || window.clipboardData).getData('text') || '';
         const cleaned = sanitizePhoneValue(text);
         const el = e.currentTarget;
-        // insert at cursor
         const start = el.selectionStart || 0;
         const end = el.selectionEnd || 0;
         const newVal = (el.value.slice(0, start) + cleaned + el.value.slice(end)).slice(0, 20);
@@ -169,9 +195,10 @@
       showAlert('Network hiccup. Please try again.', 'error');
     } finally {
       submitButton.disabled = false;
-      submitButton.textContent = form.dataset.form === 'individual'
-        ? 'Submit Registration'
-        : 'Submit Team';
+      submitButton.textContent =
+        form.dataset.form === 'individual'
+          ? 'Submit Registration'
+          : 'Submit Team';
     }
   }
 
