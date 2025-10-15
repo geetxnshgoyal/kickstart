@@ -7,7 +7,7 @@ Required environment variables
 - GOOGLE_APPLICATION_CREDENTIALS (path to service-account JSON inside container)
 - CORS_ORIGIN (optional) - whitelist origin
 - RATE_LIMIT_WINDOW_MS (optional)
-- RATE_LIMIT_MAX (optional)
+- RATE_LIMIT_MAX (optional
 
 Quick Docker
 1. Build: docker build -t kickstart:latest .
