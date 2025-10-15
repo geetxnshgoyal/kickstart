@@ -93,7 +93,7 @@ Typical env variables:
 
 Important: Do NOT commit your Firebase service account JSON to git. Add it to `.gitignore` and use environment-secure deployment options (Vercel secrets, Docker secrets, CI/CD encrypted variables).
 
-## API Endpoints 🔌
+## API Endpoints 
 
 Public:
 
