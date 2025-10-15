@@ -146,4 +146,4 @@ If you find a security concern related to Firebase credentials or admin key hand
 
 ## License �
 
-This project is provided under the MIT License. See the `LICENSE` file for details.
+This project is provided under the MIT License. See the `LICENSE` file for details
