@@ -1,42 +1,46 @@
-# Kickstart Organizer Console
+# 🚀 Kickstart
 
-This project provides an **admin dashboard** for hackathon organizers to manage registrations, form teams, and handle event logistics.
+## 📘 Project Description
 
-## 🧩 Features
-- Secure admin access key login
-- Persistent key storage with localStorage
-- Switchable dashboard views: **Individuals** and **Teams**
-- Refresh and export (CSV/XLSX) options
-- Placeholder setup for future data integration
+**Kickstart** is a hackathon landing and registration backend project built with **Express.js** and **Firebase Admin**.  
+It provides a complete solution for managing hackathon registrations with a clean landing page interface and robust backend infrastructure.
 
-## 🚀 How to Use
-1. Open `admin.html` in your browser.
-2. Enter the admin key (`test123` by default).
-3. (Optional) Check “Remember key” to store it locally.
-4. Click **Unlock Dashboard** to access the console.
+---
 
-## 🧠 Developer Notes
-- Update the real admin key inside `admin.js`:
-  ```js
-  const correctKey = "test123";
-  ```
-- Extend the dashboard logic to connect with your real backend or APIs.
-- Add team/individual management functionality as needed.
+## ✨ Features
 
-## 📂 File Structure
-```
-project-folder/
-│
-├── admin.html     # Dashboard interface and layout
-├── admin.js       # Dashboard logic and interactions
-├── style.css      # (Optional) Stylesheet for UI
-└── README.md      # Project overview and setup guide
-```
+- **Landing Page**: Interactive hackathon landing page with event information  
+- **User Registration**: Secure and complete participant registration system  
+- **Firebase Integration**: Data storage and authentication using Firebase Admin SDK  
+- **Admin Panel**: Administrative interface for managing registrations  
+- **RESTful API**: Well-structured API endpoints for registration operations  
+- **Docker Support**: Containerized deployment using Docker and Docker Compose  
 
-## 🛠️ Built With
-- HTML5
-- Vanilla JavaScript (no frameworks)
-- Local Storage API
+---
 
-## 📄 License
-This project is for internal hackathon use. Modify and reuse freely.
+## 🧰 Tech Stack
+
+| Layer | Technology |
+|--------|-------------|
+| **Backend** | Node.js, Express.js |
+| **Database** | Firebase Admin SDK |
+| **Frontend** | HTML, CSS, JavaScript |
+| **Deployment** | Docker, Vercel |
+| **Additional Tools** | CORS, body-parser, dotenv |
+
+---
+
+## ⚙️ Setup Instructions
+
+### 🧩 Prerequisites
+
+- Node.js (v14 or higher)  
+- npm or yarn  
+- Firebase project credentials  
+
+### 🏗️ Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Mahaveer-jain-18/kickstart.git
+   cd kickstart
