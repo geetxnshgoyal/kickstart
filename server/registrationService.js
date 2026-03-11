@@ -141,25 +141,25 @@ if (!db || !admin) {
       markAttendance,
       exportTeams
     };
+  } else {
+    // Non-development (production) without Firebase: export throwing stubs
+    module.exports = {
+      createIndividualRegistration: async () => { throw new Error('Database not configured. Set GOOGLE_APPLICATION_CREDENTIALS or FIREBASE_CREDENTIALS.'); },
+      createTeamRegistration: async () => { throw new Error('Database not configured.'); },
+      listTeams: async () => { throw new Error('Database not configured.'); },
+      teamUpIndividuals: async () => { throw new Error('Database not configured.'); },
+      markAttendance: async () => { throw new Error('Database not configured.'); },
+      exportTeams: async () => { throw new Error('Database not configured.'); }
+    };
   }
+} else {
+  const teamsCollection = db.collection('teams');
+  const participantsCollection = db.collection('participants');
+  const attendanceSettingsRef = db.collection('settings').doc('attendance');
 
-  // Non-development (production) without Firebase: export throwing stubs
-  module.exports = {
-    createIndividualRegistration: async () => { throw new Error('Database not configured. Set GOOGLE_APPLICATION_CREDENTIALS or FIREBASE_CREDENTIALS.'); },
-    createTeamRegistration: async () => { throw new Error('Database not configured.'); },
-    listTeams: async () => { throw new Error('Database not configured.'); },
-    teamUpIndividuals: async () => { throw new Error('Database not configured.'); },
-    markAttendance: async () => { throw new Error('Database not configured.'); },
-    exportTeams: async () => { throw new Error('Database not configured.'); }
-  };
-}
+  const FieldValue = admin.firestore.FieldValue;
+  const MAX_TEAM_UP_SELECTION = 4;
 
-const teamsCollection = db.collection('teams');
-const participantsCollection = db.collection('participants');
-const attendanceSettingsRef = db.collection('settings').doc('attendance');
-
-const FieldValue = admin.firestore.FieldValue;
-const MAX_TEAM_UP_SELECTION = 4;
 
 function sanitizeString(value) {
   if (typeof value !== 'string') {
@@ -611,3 +611,4 @@ module.exports = {
   markAttendance,
   exportTeams
 };
+}
